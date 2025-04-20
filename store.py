@@ -1,78 +1,55 @@
 class Store:
     def __init__(self, name, address):
-        self.name = name  # Название магазина
-        self.address = address  # Адрес магазина
-        self.items = {}  # Ассортимент товаров (словарь)
+        self.name = name
+        self.address = address
+        self.items = {}
 
     def add_item(self, item_name, price):
-        """Добавляет товар в ассортимент магазина."""
+        """Добавляет товар в ассортимент."""
         self.items[item_name] = price
+        print(f"Товар '{item_name}' добавлен по цене {price}.")
 
     def remove_item(self, item_name):
-        """Удаляет товар из ассортимента магазина."""
+        """Удаляет товар из ассортимента."""
         if item_name in self.items:
             del self.items[item_name]
+            print(f"Товар '{item_name}' удален.")
         else:
-            print(f"Товар '{item_name}' не найден в ассортименте.")
+            print(f"Товар '{item_name}' не найден.")
 
     def get_price(self, item_name):
-        """Возвращает цену товара по его названию. Если товар отсутствует, возвращает None."""
+        """Возвращает цену товара по его названию."""
         return self.items.get(item_name, None)
 
     def update_price(self, item_name, new_price):
         """Обновляет цену товара."""
         if item_name in self.items:
             self.items[item_name] = new_price
+            print(f"Цена товара '{item_name}' обновлена на {new_price}.")
         else:
-            print(f"Товар '{item_name}' не найден в ассортименте.")
-
-    def __str__(self):
-        """Возвращает строковое представление магазина и его ассортимента."""
-        items_list = ', '.join([f"{item}: {price}" for item, price in self.items.items()])
-        return f"Магазин '{self.name}' по адресу '{self.address}'. Ассортимент: {items_list if items_list else 'Нет товаров'}."
+            print(f"Товар '{item_name}' не найден.")
 
 
-# Пример использования
-if __name__ == "__main__":
-    store = Store("Магазин фруктов", "Улица Фруктовая, 123")
 
-    # Добавление товаров
-    store.add_item("яблоки", 0.5)
-    store.add_item("бананы", 0.75)
+store1 = Store("Магазин 1", "Улица 1, д. 1")
+store2 = Store("Магазин 2", "Улица 2, д. 2")
+store3 = Store("Магазин 3", "Улица 3, д. 3")
 
-    # Вывод информации о магазине
-    print(store)
 
-    # Получение цены товара
-    print("Цена яблок:", store.get_price("яблоки"))
+store1.add_item("Яблоки", 50)
+store1.add_item("Бананы", 75)
 
-    # Обновление цены товара
-    store.update_price("яблоки", 0.6)
-    print("Обновленная цена яблок:", store.get_price("яблоки"))
+store2.add_item("Хлеб", 25)
+store2.add_item("Молоко", 40)
 
-    # Удаление товара
-    store.remove_item("бананы")
-    print(store)
+store3.add_item("Кофе", 150)
+store3.add_item("Чай", 100)
 
-    # Пример использования
-    if __name__ == "__main__":
-        store = Store("Бакалея", "Улица Гороховая, 123")
 
-        # Добавление товаров
-        store.add_item("рис", 0.1)
-        store.add_item("сахар", 0.1)
-
-        # Вывод информации о магазине
-        print(store)
-
-        # Получение цены товара
-        print("Цена риса:", store.get_price("рис"))
-
-        # Обновление цены товара
-        store.update_price("рис", 0.2)
-        print("Обновленная цена риса:", store.get_price("рис"))
-
-        # Удаление товара
-        store.remove_item("сахар")
-        print(store)
-    
+print("\nТестирование методов на примере магазина 1:")
+store1.add_item("Апельсины", 60)
+print("Цена на Яблоки:", store1.get_price("Яблоки"))
+store1.update_price("Яблоки", 55)
+print("Обновленная цена на Яблоки:", store1.get_price("Яблоки"))
+store1.remove_item("Бананы")
+print("Цена на Бананы:", store1.get_price("Бананы"))
